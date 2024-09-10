@@ -7,7 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TabControl FontSize="20">
+        <TabControl FontSize="20" TabStripPlacement="Left">
+            
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Padding" Value="4" />
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <ContentPresenter Content="{TemplateBinding Content}">
+                                    <ContentPresenter.LayoutTransform>
+                                        <RotateTransform Angle="90" />
+                                    </ContentPresenter.LayoutTransform>
+                                </ContentPresenter>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            
             <TabItem Header="Grid">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -70,9 +88,17 @@
                     </StackPanel>
                 </StackPanel>                
             </TabItem>
-            <TabItem Header="WrapPanel">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="10" Height="10" Fill="#FF315CCC"/>
+                        <Label>
+                            WrapPanel
+                        </Label>
+                    </StackPanel>
+                </TabItem.Header>
                 <WrapPanel ItemHeight="50" ItemWidth="100" Background="Bisque" Height="50">
-                    <Button Content="1"/>
+                    <Button Content="1" Background="Gray"/>
                     <Button Height="70" Content="2"/>
                     <Button Height="70" Content="3"/>
                     <Button Content="4"/>
