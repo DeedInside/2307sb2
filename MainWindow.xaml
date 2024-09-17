@@ -25,9 +25,16 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            
+
             <TabItem Header="Grid">
-                <Grid>
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <Label Content="123123"/>
+                        <Label Content="123123"/>
+                        <Label Content="123123"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
+            <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
                         <RowDefinition Height="2*" />
@@ -103,6 +110,54 @@
                     <Button Height="70" Content="3"/>
                     <Button Content="4"/>
                 </WrapPanel>
+            </TabItem>
+            <TabItem Header="17.09">
+                <StackPanel>
+                    <StackPanel>
+                        <CheckBox Name="check1"  Content="выбор 1" 
+                                  IsChecked="False"
+                                  Checked="check1_Checked"
+                                  Unchecked="check1_Unchecked"/>
+                        <StackPanel Name="Stack_obr" Visibility="Collapsed" 
+                                    Orientation="Horizontal">
+                            <Label Content="Образование"/>
+                            <TextBox Width="100"/>
+                        </StackPanel>
+                        <CheckBox Name="check2" Content="выбор 1" IsChecked="False"/>
+                        <CheckBox Name="check3" Content="выбор 1" IsChecked="{x:Null}"/>
+                        <Button Content="SAVE" Click="Button_Click"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <RadioButton GroupName="1" Content="rad 1" 
+                                     Checked="RadioButton_Checked"/>
+                        <RadioButton GroupName="1" Content="rad 2"
+                                     Checked="RadioButton_Checked"/>
+                        <RadioButton GroupName="2" Content="rad 3"
+                                     Checked="RadioButton_Checked"/>
+                        <RadioButton GroupName="2" Content="rad 4"
+                                     Checked="RadioButton_Checked"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Expander Header="lable">
+                            <StackPanel>
+                                <Label Content="123123"/>
+                                <Button Content="qweqwe"/>
+                                <Label Content="123123"/>
+                                <Button Content="qweqwe"/>
+                                <Label Content="123123"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                    <StackPanel>
+                        <ListBox Name="ListBoxUser" SelectionChanged="ListBoxUser_SelectionChanged" />
+                        <Button Content="Add user" Click="add_user_to_list"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <ComboBox Name="ComboBoxUser">
+                            
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>
