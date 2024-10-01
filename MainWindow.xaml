@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2307sb2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="650" Width="800">
     <Grid>
         <TabControl FontSize="20" TabStripPlacement="Left">
             
@@ -36,7 +36,7 @@
                 </TabItem.ToolTip>
             <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="2*" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -46,8 +46,6 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                 
-                    <Button Content="1" FontSize="20"
-                            Grid.Column="0" Grid.ColumnSpan="3"/>
                     <Button Content="2" FontSize="20"
                             Grid.Row="2"/>
                     <Button Content="3" FontSize="20"
@@ -55,6 +53,24 @@
                     <Button Content="4" FontSize="20"
                             Grid.Row="1" Grid.Column="0"
                             Grid.ColumnSpan="2"/>
+                    <Menu FontSize="20" Margin="0 2 0 2"
+                          Grid.Column="0" Grid.ColumnSpan="3">
+                        <MenuItem Header="Файл">
+                            <MenuItem Header="свойства">
+                                <MenuItem>
+                                    <MenuItem.Header>
+                                        <StackPanel>
+                                            <Label Content="нет свойств"/>
+                                            <Label Content="ТОЧНО НЕТ!!!"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                </MenuItem>
+                            </MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="Вид">
+                            
+                        </MenuItem>
+                    </Menu>
                 </Grid>
             </TabItem>
             <TabItem Header="DockPanel">
@@ -149,13 +165,34 @@
                         </Expander>
                     </StackPanel>
                     <StackPanel>
-                        <ListBox Name="ListBoxUser" SelectionChanged="ListBoxUser_SelectionChanged" />
+                        <ListBox ItemsSource="{Binding users}" SelectionChanged="ListBoxUser_SelectionChanged" />
                         <Button Content="Add user" Click="add_user_to_list"/>
                     </StackPanel>
                     <StackPanel>
                         <ComboBox Name="ComboBoxUser">
                             
                         </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="01.10">
+                <StackPanel>
+                    <ListView Name="userList" FontSize="40" ItemsSource="{Binding users}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="Date"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel DataContext="{Binding ElementName=userList, Path=SelectedItem}">
+                        <TextBox Text="123" FontSize="{Binding ElementName=userList, Path=FontSize}"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Click="Button_save_user" Content="save"/>
                     </StackPanel>
                 </StackPanel>
             </TabItem>

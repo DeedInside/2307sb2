@@ -1,4 +1,5 @@
 ﻿using _2307sb2.Model;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,18 +15,18 @@ namespace _2307sb2
 {
     public partial class MainWindow : Window
     {
-        List<User> users;
+        public ObservableCollection<User> users { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            users = new List<User>()
+            users = new ObservableCollection<User>()
             {
                 new User("Name 1","Email","Pass", DateTime.Now),
                 new User("Name 2","Email","Pass", DateTime.Now),
                 new User("Name 3","Email","Pass", DateTime.Now)
             };
-            ListBoxUser.ItemsSource = users;
-
+            this.DataContext = this;
+            
             ComboBoxUser.ItemsSource = UserNames(users);
         }
 
@@ -59,9 +60,10 @@ namespace _2307sb2
 
                 if (ListUser != null)
                 {
-                    if (ListUser.SelectedItem != null)
+                    if (ListUser.SelectedIndex != -1)
                     {
-                        MessageBox.Show(ListUser.SelectedItem.ToString());
+                        users[ListUser.SelectedIndex] = new User("new name", "new Email", "new passwor", new DateTime());
+                        //ListBoxUser.Items.Refresh();
                     }
                 }
             }
@@ -74,17 +76,22 @@ namespace _2307sb2
         private void add_user_to_list(object sender, RoutedEventArgs e)
         {
             users.Add(new User("new Name", "new Emal", "new Pass", DateTime.Now));
-            ListBoxUser.Items.Refresh();
+            //ListBoxUser.Items.Refresh();
         }
-        List<string> UserNames(List<User> users)
+        ObservableCollection<string> UserNames(ObservableCollection<User> users)
         {
-            List<string> result = new List<string>();
+            ObservableCollection<string> result = new();
 
             foreach (User user in users)
             {
                 result.Add(user.Name);
             }
             return result;
+        }
+
+        private void Button_save_user(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
